@@ -11,7 +11,7 @@ class DomainEmailValidator extends ConstraintValidator
 {
     public function validate($value, Constraint $constraint)
     {
-        $domain = explode($value, '@');
+        $domain = explode('@', $value);
 
         if ($domain[1]!='deloitte.com') {
             // the argument must be a string or an object implementing __toString()
