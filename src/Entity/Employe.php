@@ -50,9 +50,44 @@ class Employe implements UserInterface
     private $photo;
 
     /**
+     * @ORM\Column(type="boolean", nullable=false)
+     */
+    private $newPassword;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $secteur;
+
+
+    public function __construct()
+    {
+        $this->newPassword = true;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getNewPassword()
+    {
+        return $this->newPassword;
+    }
+
+    /**
+     * @param mixed $newPassword
+     */
+    public function setNewPassword($newPassword)
+    {
+        $this->newPassword = $newPassword;
+    }
+
+
+    public function hasRole($role){
+        return in_array($role, $this->roles);
+    }
+
+
 
     public function getId(): ?int
     {

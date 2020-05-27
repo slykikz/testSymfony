@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello EmployeController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>La liste des employés ✅</h1>
+
+        <a href="{{ path('app_logout') }}">Se Déconnecter</a>
+
+    {% if app.user.hasRole('ROLE_COMPTABILITE') %}
+        <a href="#">Ajouter un employe</a>
+    {% endif %}
+
+    <table>
+        <thead>
+        <th>
+            Nom
+        </th>
+
+        <th>
+            Prenom
+        </th>
+        <th>
+            Photo
+        </th>
+
+        <th>
+            Secteur
+        </th>
+
+        {% if app.user.hasRole('ROLE_COMPTABILITE') %}
+            <th>
+                Action
+        {% endif %}
+
+        </thead>
+        <tbody>
+        {% for employe in employes %}
+            <tr>
+                <td>{{ employe.nom }}</td>
+                <td>{{ employe.prenom }}</td>
+                <td><img src="{{ employe.photo }}" style="max-width: 55px"></td>
+                <td>{{ employe.secteur }}</td>
+
+                {% if app.user.hasRole('ROLE_COMPTABILITE') %}
+                    <td>
+                        <a>Supprimer l'user</a>
+                    </td>
+                {% endif %}
+
+            </tr>
+
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
